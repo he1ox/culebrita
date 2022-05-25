@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Text;
+using System.Threading;
 
 namespace culebrita.SnakeOOP
 {
@@ -29,15 +31,32 @@ namespace culebrita.SnakeOOP
             this.ScreenHeight = 20;
             this.ScreenWidth = 60;
             this.Punteo = 0;
-            this.Velocidad = 0;
+            this.Velocidad = 100; // 100 milisegundos
         }
 
 
         public void run()
         {
+            var foodPosition = 0; 
+            var snake = new Queue<Point>();
+            var snakeLength = 3;
+            var currentPosition = new Point(0,9);
+            var direccion = Direccion.DERECHA;
+
+            snake.Enqueue(currentPosition);
             DibujaPantalla();
 
-            //Evito que se acabe la ejecución rápido
+            while(moveSnake(snake, currentPosition, snakeLength))
+            {
+                Thread.Sleep(this.Velocidad);
+                direccion = GetDireccion(direccion);
+                currentPosition = ObtenerSiguienteDireccion(direccion, currentPosition);
+            }
+
+            Console.ResetColor();
+            Console.SetCursorPosition(this.ScreenWidth / 2 - 4, this.ScreenHeight / 2);
+            Console.Write("Haz fallado.");
+            Thread.Sleep(2000);
             Console.ReadKey();
         }
 
@@ -152,12 +171,40 @@ namespace culebrita.SnakeOOP
             return siguientePosicion;
         }
 
-        bool MoveSnake(Queue<Point> snake, Point targetPosition, int snakeLenght)
+        bool moveSnake(Queue<Point> snake, Point targetPosition, int snakeLength)
         {
+            var lastPoint = snake.Last();
+            if (lastPoint.Equals(targetPosition)) return true;
 
-        }
-        {
+            if (snake.Any(x => x.Equals(targetPosition))) return true;
 
+            if (targetPosition.X < 0 || targetPosition.X >= this.ScreenWidth || targetPosition.Y < 0
+                || targetPosition.Y >= this.ScreenHeight)
+            {
+                return false;
+            };
+
+
+            Console.BackgroundColor = ConsoleColor.Green;
+            Console.SetCursorPosition(lastPoint.X + 1, lastPoint.Y + 1);
+            Console.Write(" ");
+
+            snake.Enqueue(targetPosition);
+
+            Console.BackgroundColor = ConsoleColor.Red;
+            Console.SetCursorPosition(targetPosition.X + 1, targetPosition.Y + 1);
+            Console.Write(" ");
+
+            //Quitamos la cola
+            if (snake.Count > snakeLength)
+            {
+                var removePoint = snake.Dequeue();
+                Console.BackgroundColor = ConsoleColor.Black;
+                Console.SetCursorPosition(removePoint.X + 1, removePoint.Y + 1);
+                Console.Write(" ");
+            }
+
+            return true;
         }
     }
 }
