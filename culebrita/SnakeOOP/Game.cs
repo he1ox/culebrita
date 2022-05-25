@@ -31,19 +31,19 @@ namespace culebrita.SnakeOOP
             this.ScreenHeight = 20;
             this.ScreenWidth = 60;
             this.Punteo = 0;
-            this.Velocidad = 100; // 100 milisegundos
+            this.Velocidad = 100; // 100 milisegundos = 0.1s
         }
 
 
         public void run()
         {
-            var foodPosition = 0; 
-            var snake = new Queue<Point>();
+            var foodPosition = Point.Empty; 
+            var snake = new Snake();
             var snakeLength = 3;
             var currentPosition = new Point(0,9);
             var direccion = Direccion.DERECHA;
 
-            snake.Enqueue(currentPosition);
+            snake.EnQueue(currentPosition);
             DibujaPantalla();
 
             while(moveSnake(snake, currentPosition, snakeLength))
@@ -171,12 +171,12 @@ namespace culebrita.SnakeOOP
             return siguientePosicion;
         }
 
-        bool moveSnake(Queue<Point> snake, Point targetPosition, int snakeLength)
+        bool moveSnake(Snake snake, Point targetPosition, int snakeLength)
         {
-            var lastPoint = snake.Last();
+            var lastPoint = (Point) snake.ListaCola.Last();
             if (lastPoint.Equals(targetPosition)) return true;
 
-            if (snake.Any(x => x.Equals(targetPosition))) return true;
+            if (snake.ListaCola.Any(x => x.Equals(targetPosition))) return true;
 
             if (targetPosition.X < 0 || targetPosition.X >= this.ScreenWidth || targetPosition.Y < 0
                 || targetPosition.Y >= this.ScreenHeight)
@@ -189,16 +189,16 @@ namespace culebrita.SnakeOOP
             Console.SetCursorPosition(lastPoint.X + 1, lastPoint.Y + 1);
             Console.Write(" ");
 
-            snake.Enqueue(targetPosition);
+            snake.EnQueue(targetPosition);
 
             Console.BackgroundColor = ConsoleColor.Red;
             Console.SetCursorPosition(targetPosition.X + 1, targetPosition.Y + 1);
             Console.Write(" ");
 
             //Quitamos la cola
-            if (snake.Count > snakeLength)
+            if (snake.ListaCola.Count() > snakeLength)
             {
-                var removePoint = snake.Dequeue();
+                var removePoint = (Point) snake.DeQueue();
                 Console.BackgroundColor = ConsoleColor.Black;
                 Console.SetCursorPosition(removePoint.X + 1, removePoint.Y + 1);
                 Console.Write(" ");

@@ -222,9 +222,30 @@ namespace culebrita
 
         static void Main()
         {
-            //culebritaNormal();
+            culebritaNormal();
             Game snakeGame = new Game();
             snakeGame.run();
+
+            //Snake colaLineal = new Snake();
+
+            //try
+            //{
+            //    colaLineal.EnQueue(1);
+            //    colaLineal.EnQueue(2);
+            //    colaLineal.EnQueue(3);
+            //    colaLineal.EnQueue("Hola");
+            //    colaLineal.DeQueue();
+
+            //    while (!colaLineal.ColaVacia())
+            //    {
+            //        Console.WriteLine("Desencolando : " + colaLineal.DeQueue());
+            //    }
+            //}
+            //catch (Exception)
+            //{
+            //    throw;
+            //}
+
         }
 
 
