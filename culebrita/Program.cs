@@ -1,4 +1,5 @@
-﻿using System;
+﻿using culebrita.SnakeOOP;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
@@ -174,11 +175,7 @@ namespace culebrita
         }
 
 
-
-
-
-
-        static void Main()
+        public static void culebritaNormal()
         {
             var punteo = 0;
             var velocidad = 100; //modificar estos valores y ver qué pasa
@@ -219,7 +216,15 @@ namespace culebrita
             Thread.Sleep(2000);
             Console.ReadKey();
 
+        }
 
+
+
+        static void Main()
+        {
+            //culebritaNormal();
+            Game snakeGame = new Game();
+            snakeGame.run();
         }
 
 
