@@ -26,7 +26,6 @@ namespace culebrita.SnakeOOP
         public void EnQueue(object point)
         {
             if (ColaLlena()) throw new Exception("La cola está llena");
-
             ListaCola[++Fin] = point;
         }
 
@@ -35,7 +34,6 @@ namespace culebrita.SnakeOOP
         public object DeQueue()
         {
             if (ColaVacia()) throw new Exception("La cola está vacía");
-
             object aux = ListaCola[Frente];
             ListaCola[Frente] = null;
             Frente++;
