@@ -5,7 +5,7 @@ using System.Text;
 
 namespace culebrita.SnakeOOP
 {
-    internal class Snake 
+    internal class Snake : ICola
     {
         internal int Fin { get; set; }
         internal int Frente { get; set; }

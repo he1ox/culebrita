@@ -26,7 +26,8 @@ namespace culebrita.SnakeOOP
         /// <summary>
         /// Este método devuelve el primer elemento en haber entrado a la cola.
         /// </summary>
-        void FrenteCola();
+        /// <returns>Objeto</returns>
+        object FrenteCola();
         /// <summary>
         /// Verifica si la colá esta vacía.
         /// </summary>
