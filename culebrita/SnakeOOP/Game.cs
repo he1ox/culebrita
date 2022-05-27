@@ -45,12 +45,27 @@ namespace culebrita.SnakeOOP
 
             snake.EnQueue(currentPosition);
             DibujaPantalla();
+            MuestraPunteo();
 
             while(moveSnake(snake, currentPosition, snakeLength))
             {
                 Thread.Sleep(this.Velocidad);
                 direccion = GetDireccion(direccion);
                 currentPosition = ObtenerSiguienteDireccion(direccion, currentPosition);
+
+                if (currentPosition.Equals(foodPosition))
+                {
+                    foodPosition = Point.Empty;
+                    snakeLength++;
+                    this.Punteo += 10;
+                    MuestraPunteo();
+                }
+
+                if (foodPosition == Point.Empty)
+                {
+                    foodPosition = ShowFood(snake);
+                }
+
             }
 
             Console.ResetColor();
@@ -173,10 +188,10 @@ namespace culebrita.SnakeOOP
 
         bool moveSnake(SnakeLineal snake, Point targetPosition, int snakeLength)
         {
-            var lastPoint = (Point) snake.UltimoElemento();
+            var lastPoint = snake.UltimoElemento();
             if (lastPoint.Equals(targetPosition)) return true;
 
-            if (snake.ListaCola.Any(x => x != null && x.Equals(targetPosition))) return true;
+            if (snake.ListaCola.Any(x => x.Equals(targetPosition))) return true;
 
             if (targetPosition.X < 0 || targetPosition.X >= this.ScreenWidth || targetPosition.Y < 0
                 || targetPosition.Y >= this.ScreenHeight)
@@ -206,5 +221,39 @@ namespace culebrita.SnakeOOP
 
             return true;
         }
+
+        /// <summary>
+        /// Recibe como argumento la cola que representa el snake, calcula de mandera random
+        /// un punto con las coordenadas (x,y) en el que mostrar la comida, pero antes verifica que este
+        /// punto no esté actualmente ocupado por la queue del snake, y que tenga un minimo de espacio con la 
+        /// cabeza de la serpiente
+        /// </summary>
+        /// <returns>Devuelve la nueva posición para la comida</returns>
+        Point ShowFood(SnakeLineal snake)
+        {
+            var foodPoint = Point.Empty;
+            var snakeHead = snake.UltimoElemento();
+            var random = new Random();
+
+
+            do
+            {
+                //Quitamos un -1 por la linea blanca que rodea la consola
+                var x = random.Next(0, this.ScreenWidth - 1);
+                var y = random.Next(0, this.ScreenHeight - 1);
+                if (snake.ListaCola.All(p => p.X != x || p.Y != y) && Math.Abs(x - snakeHead.X) + Math.Abs(y - snakeHead.Y) > 8)
+                {
+                    foodPoint = new Point(x, y);
+                }
+
+            } while (foodPoint == Point.Empty);
+
+            Console.BackgroundColor= ConsoleColor.Blue;
+            Console.SetCursorPosition(foodPoint.X + 1, foodPoint.Y + 1);
+            Console.Write(" ");
+
+            return foodPoint;
+        }
+
     }
 }

@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Text;
 
 namespace culebrita.SnakeOOP
 {
-    internal class SnakeLineal : ICola
+    internal class SnakeLineal 
     {
         internal int Fin { get; set; }
         internal int Frente { get; set; }
         internal int QueueSize { get; set; }
-        internal object[]? ListaCola { get; set; }
+        internal Point[] ListaCola { get; set; }
         internal int Size { get; set; }
     
         public SnakeLineal(int QueueSize = 40)
@@ -18,21 +19,21 @@ namespace culebrita.SnakeOOP
             Frente = 0;
             Fin = -1;
             this.QueueSize = QueueSize;
-            ListaCola = new object[this.QueueSize];
+            ListaCola = new Point[this.QueueSize];
         }
 
-        public void EnQueue(object point)
+        public void EnQueue(Point point)
         {
             if (ColaLlena()) throw new Exception("La cola está llena");
             ListaCola[++Fin] = point;
             Size++;
         }
 
-        public object DeQueue()
+        public Point DeQueue()
         {
             if (ColaVacia()) throw new Exception("La cola está vacía");
-            object aux = ListaCola[Frente];
-            ListaCola[Frente] = null;
+            Point aux = ListaCola[Frente];
+            ListaCola[Frente] = Point.Empty;
             Frente++;
             Size--;
             return aux;
@@ -45,7 +46,7 @@ namespace culebrita.SnakeOOP
             Frente = 0;
             Fin = -1;
         }
-        public object FrenteCola()
+        public Point FrenteCola()
         {
             if (ColaVacia()) throw new Exception("La cola está vacía");
             return ListaCola[Frente];
@@ -60,7 +61,7 @@ namespace culebrita.SnakeOOP
             return Fin == this.QueueSize - 1;
         }
 
-        public object UltimoElemento()
+        public Point UltimoElemento()
         {
             if (ColaVacia()) throw new Exception("La cola está vacía");
 
