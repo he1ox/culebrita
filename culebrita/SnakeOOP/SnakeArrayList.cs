@@ -55,7 +55,6 @@ namespace culebrita.SnakeOOP
         }
         public bool ColaVacia() => ListaCola.Count == 0;
 
-
         //Ya que crece exponencialmente en base 2, el máximo número de elementos es int.MaxValue -> 2^31
         public bool ColaLlena() => ListaCola.Count == int.MaxValue;
 
