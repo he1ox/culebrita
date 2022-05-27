@@ -38,7 +38,7 @@ namespace culebrita.SnakeOOP
         public void run()
         {
             var foodPosition = Point.Empty; 
-            var snake = new Snake();
+            var snake = new SnakeLineal();
             var snakeLength = 3;
             var currentPosition = new Point(0,9);
             var direccion = Direccion.DERECHA;
@@ -171,7 +171,7 @@ namespace culebrita.SnakeOOP
             return siguientePosicion;
         }
 
-        bool moveSnake(Snake snake, Point targetPosition, int snakeLength)
+        bool moveSnake(SnakeLineal snake, Point targetPosition, int snakeLength)
         {
             var lastPoint = (Point) snake.ListaCola.Last();
             if (lastPoint.Equals(targetPosition)) return true;

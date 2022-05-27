@@ -5,14 +5,14 @@ using System.Text;
 
 namespace culebrita.SnakeOOP
 {
-    internal class Snake : ICola
+    internal class SnakeLineal : ICola
     {
         internal int Fin { get; set; }
         internal int Frente { get; set; }
         internal int QueueSize { get; set; }
         internal object[] ListaCola { get; set; }
 
-        public Snake(int QueueSize = 40)
+        public SnakeLineal(int QueueSize = 40)
         {
             Frente = 0;
             Fin = -1;
