@@ -176,7 +176,7 @@ namespace culebrita.SnakeOOP
             var lastPoint = (Point) snake.UltimoElemento();
             if (lastPoint.Equals(targetPosition)) return true;
 
-            if (snake.ToString().Any(x => x.Equals(targetPosition))) return true;
+            if (snake.ListaCola.Any(x => x != null && x.Equals(targetPosition))) return true;
 
             if (targetPosition.X < 0 || targetPosition.X >= this.ScreenWidth || targetPosition.Y < 0
                 || targetPosition.Y >= this.ScreenHeight)

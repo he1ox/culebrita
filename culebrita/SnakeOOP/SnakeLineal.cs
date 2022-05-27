@@ -10,7 +10,7 @@ namespace culebrita.SnakeOOP
         internal int Fin { get; set; }
         internal int Frente { get; set; }
         internal int QueueSize { get; set; }
-        internal object[] ListaCola { get; set; }
+        internal object[]? ListaCola { get; set; }
         internal int Size { get; set; }
     
         public SnakeLineal(int QueueSize = 40)
@@ -31,13 +31,13 @@ namespace culebrita.SnakeOOP
         public object DeQueue()
         {
             if (ColaVacia()) throw new Exception("La cola está vacía");
-            //object aux = ListaCola[Frente];
-            //ListaCola[Frente] = null;
-            //Frente++;
-            //return aux;
-
+            object aux = ListaCola[Frente];
+            ListaCola[Frente] = null;
+            Frente++;
             Size--;
-            return ListaCola[Frente++];
+            return aux;
+
+            //return ListaCola[Frente++];
         }
 
         public void BorrarCola()
