@@ -38,7 +38,7 @@ namespace culebrita.SnakeOOP
         public void run()
         {
             var foodPosition = Point.Empty; 
-            var snake = new SnakeLineal();
+            SnakeLineal snake = new SnakeLineal(1000000);
             var snakeLength = 3;
             var currentPosition = new Point(0,9);
             var direccion = Direccion.DERECHA;
@@ -173,10 +173,10 @@ namespace culebrita.SnakeOOP
 
         bool moveSnake(SnakeLineal snake, Point targetPosition, int snakeLength)
         {
-            var lastPoint = (Point) snake.ListaCola.Last();
+            var lastPoint = (Point) snake.UltimoElemento();
             if (lastPoint.Equals(targetPosition)) return true;
 
-            if (snake.ListaCola.Any(x => x.Equals(targetPosition))) return true;
+            if (snake.ToString().Any(x => x.Equals(targetPosition))) return true;
 
             if (targetPosition.X < 0 || targetPosition.X >= this.ScreenWidth || targetPosition.Y < 0
                 || targetPosition.Y >= this.ScreenHeight)
@@ -196,7 +196,7 @@ namespace culebrita.SnakeOOP
             Console.Write(" ");
 
             //Quitamos la cola
-            if (snake.ListaCola.Count() > snakeLength)
+            if (snake.Size > snakeLength)
             {
                 var removePoint = (Point) snake.DeQueue();
                 Console.BackgroundColor = ConsoleColor.Black;

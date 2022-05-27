@@ -222,7 +222,8 @@ namespace culebrita
 
         static void Main()
         {
-            culebritaNormal();
+            //culebritaNormal();
+
             Game snakeGame = new Game();
             snakeGame.run();
 
