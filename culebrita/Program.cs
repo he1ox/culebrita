@@ -114,14 +114,14 @@ namespace culebrita
 
 
 
-        private static bool MoverLaCulebrita(SnakeLineal culebra, Point posiciónObjetivo,
+        private static bool MoverLaCulebrita(ICola culebra, Point posiciónObjetivo,
             int longitudCulebra, Size screenSize)
         {
             var lastPoint = culebra.UltimoElemento();
 
             if (lastPoint.Equals(posiciónObjetivo)) return true;
 
-            if (culebra.ListaCola.Any(x => x.Equals(posiciónObjetivo))) return false;
+            if (culebra.GetElementos().Any(x => x.Equals(posiciónObjetivo))) return false;
 
             if (posiciónObjetivo.X < 0 || posiciónObjetivo.X >= screenSize.Width
                     || posiciónObjetivo.Y < 0 || posiciónObjetivo.Y >= screenSize.Height)
@@ -140,7 +140,7 @@ namespace culebrita
             Console.Write(" ");
 
             // Quitar cola
-            if (culebra.Size > longitudCulebra)
+            if (culebra.GetSize() > longitudCulebra)
             {
                 var removePoint = culebra.DeQueue();
                 Console.BackgroundColor = ConsoleColor.Black;
@@ -150,7 +150,7 @@ namespace culebrita
             return true;
         }
 
-        private static Point MostrarComida(Size screenSize, SnakeLineal culebra)
+        private static Point MostrarComida(Size screenSize, ICola culebra)
         {
             var lugarComida = Point.Empty;
             var cabezaCulebra = culebra.UltimoElemento();
@@ -159,7 +159,7 @@ namespace culebrita
             {
                 var x = rnd.Next(0, screenSize.Width - 1);
                 var y = rnd.Next(0, screenSize.Height - 1);
-                if (culebra.ListaCola.All(p => p.X != x || p.Y != y)
+                if (culebra.GetElementos().All(p => p.X != x || p.Y != y)
                     && Math.Abs(x - cabezaCulebra.X) + Math.Abs(y - cabezaCulebra.Y) > 8)
                 {
                     lugarComida = new Point(x, y);
@@ -181,7 +181,7 @@ namespace culebrita
             var velocidad = 100; //modificar estos valores y ver qué pasa
             var posiciónComida = Point.Empty;
             var tamañoPantalla = new Size(60, 20);
-            var culebrita = new SnakeLineal(1000);
+            ICola culebrita = new SnakeArrayList();
             var longitudCulebra = 10; //modificar estos valores y ver qué pasa
             var posiciónActual = new Point(0, 9); //modificar estos valores y ver qué pasa
             culebrita.EnQueue(posiciónActual);

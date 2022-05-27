@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Text;
 
 namespace culebrita.SnakeOOP
@@ -10,13 +11,13 @@ namespace culebrita.SnakeOOP
         /// Este método se encarga de insertar un elemento a la cola
         /// </summary>
         /// <param name="elemento">Objeto a encolar</param>
-        void EnQueue(Object elemento);
+        void EnQueue(Point elemento);
 
         /// <summary>
         /// Este método se encarga de eliminar el primer elemento en la cola, y lo devuelve. 
         /// </summary>
         /// <returns>Objeto</returns>
-        object DeQueue();
+        Point DeQueue();
 
         /// <summary>
         /// Este método resetea la cola.
@@ -27,7 +28,7 @@ namespace culebrita.SnakeOOP
         /// Este método devuelve el primer elemento en haber entrado a la cola.
         /// </summary>
         /// <returns>Objeto</returns>
-        object FrenteCola();
+        Point FrenteCola();
         /// <summary>
         /// Verifica si la colá esta vacía.
         /// </summary>
@@ -39,5 +40,11 @@ namespace culebrita.SnakeOOP
         /// </summary>
         /// <returns>True</returns>
         bool ColaLlena();
+
+        Point[] GetElementos();
+
+        Point UltimoElemento();
+
+        int GetSize();
     }
 }

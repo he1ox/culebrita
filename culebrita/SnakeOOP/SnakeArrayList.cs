@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Text;
 
 namespace culebrita.SnakeOOP
@@ -26,17 +27,17 @@ namespace culebrita.SnakeOOP
             ListaCola = new ArrayList();
         }
 
-        public void EnQueue(object point)
+        public void EnQueue(Point point)
         {
             if (ColaLlena()) throw new Exception("La cola está llena");
             ++Fin;
             ListaCola.Add(point);
         }
 
-        public object DeQueue()
+        public Point DeQueue()
         {
             if (ColaVacia()) throw new Exception("La cola está vacía");
-            object aux = ListaCola[Frente];
+            Point aux = (Point) ListaCola[Frente];
             ListaCola.RemoveAt(Frente);
             Fin--;
             return aux;
@@ -47,10 +48,10 @@ namespace culebrita.SnakeOOP
             Frente = 0;
             Fin = -1;
         }
-        public object FrenteCola()
+        public Point FrenteCola()
         {
             if (ColaVacia()) throw new Exception("La cola está vacía");
-            return ListaCola[Frente];
+            return (Point) ListaCola[Frente];
         }
         public bool ColaVacia()
         {
@@ -68,5 +69,27 @@ namespace culebrita.SnakeOOP
             return ListaCola.Capacity;
         }
 
+        public Point[] GetElementos()
+        {
+            Point[] resultados = new Point[ListaCola.Count];
+            int i = 0;
+
+            foreach (object punto in ListaCola)
+            {
+                resultados[i++] = (Point) punto;
+            }
+            return resultados;
+        }
+
+        public Point UltimoElemento()
+        {
+            return (Point) ListaCola.ToArray().GetValue(Fin);
+        }
+
+
+        public int GetSize()
+        {
+            return ListaCola.Count;
+        }
     }
 }

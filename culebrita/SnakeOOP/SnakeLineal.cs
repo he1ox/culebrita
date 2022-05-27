@@ -6,7 +6,7 @@ using System.Text;
 
 namespace culebrita.SnakeOOP
 {
-    internal class SnakeLineal 
+    internal class SnakeLineal : ICola
     {
         internal int Fin { get; set; }
         internal int Frente { get; set; }
@@ -66,6 +66,16 @@ namespace culebrita.SnakeOOP
             if (ColaVacia()) throw new Exception("La cola está vacía");
 
             return ListaCola[Fin];
+        }
+
+        public Point[] GetElementos()
+        {
+            return ListaCola;
+        }
+
+        public int GetSize()
+        {
+            return Size;
         }
     }
 }
