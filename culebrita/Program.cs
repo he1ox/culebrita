@@ -114,14 +114,14 @@ namespace culebrita
 
 
 
-        private static bool MoverLaCulebrita(Queue<Point> culebra, Point posiciónObjetivo,
+        private static bool MoverLaCulebrita(SnakeLineal culebra, Point posiciónObjetivo,
             int longitudCulebra, Size screenSize)
         {
-            var lastPoint = culebra.Last();
+            var lastPoint = culebra.UltimoElemento();
 
             if (lastPoint.Equals(posiciónObjetivo)) return true;
 
-            if (culebra.Any(x => x.Equals(posiciónObjetivo))) return false;
+            if (culebra.ListaCola.Any(x => x.Equals(posiciónObjetivo))) return false;
 
             if (posiciónObjetivo.X < 0 || posiciónObjetivo.X >= screenSize.Width
                     || posiciónObjetivo.Y < 0 || posiciónObjetivo.Y >= screenSize.Height)
@@ -133,16 +133,16 @@ namespace culebrita
             Console.SetCursorPosition(lastPoint.X + 1, lastPoint.Y + 1);
             Console.WriteLine(" ");
 
-            culebra.Enqueue(posiciónObjetivo);
+            culebra.EnQueue(posiciónObjetivo);
 
             Console.BackgroundColor = ConsoleColor.Red;
             Console.SetCursorPosition(posiciónObjetivo.X + 1, posiciónObjetivo.Y + 1);
             Console.Write(" ");
 
             // Quitar cola
-            if (culebra.Count > longitudCulebra)
+            if (culebra.Size > longitudCulebra)
             {
-                var removePoint = culebra.Dequeue();
+                var removePoint = culebra.DeQueue();
                 Console.BackgroundColor = ConsoleColor.Black;
                 Console.SetCursorPosition(removePoint.X + 1, removePoint.Y + 1);
                 Console.Write(" ");
@@ -150,16 +150,16 @@ namespace culebrita
             return true;
         }
 
-        private static Point MostrarComida(Size screenSize, Queue<Point> culebra)
+        private static Point MostrarComida(Size screenSize, SnakeLineal culebra)
         {
             var lugarComida = Point.Empty;
-            var cabezaCulebra = culebra.Last();
+            var cabezaCulebra = culebra.UltimoElemento();
             var rnd = new Random();
             do
             {
                 var x = rnd.Next(0, screenSize.Width - 1);
                 var y = rnd.Next(0, screenSize.Height - 1);
-                if (culebra.All(p => p.X != x || p.Y != y)
+                if (culebra.ListaCola.All(p => p.X != x || p.Y != y)
                     && Math.Abs(x - cabezaCulebra.X) + Math.Abs(y - cabezaCulebra.Y) > 8)
                 {
                     lugarComida = new Point(x, y);
@@ -181,10 +181,10 @@ namespace culebrita
             var velocidad = 100; //modificar estos valores y ver qué pasa
             var posiciónComida = Point.Empty;
             var tamañoPantalla = new Size(60, 20);
-            var culebrita = new Queue<Point>();
-            var longitudCulebra = 3; //modificar estos valores y ver qué pasa
+            var culebrita = new SnakeLineal(1000);
+            var longitudCulebra = 10; //modificar estos valores y ver qué pasa
             var posiciónActual = new Point(0, 9); //modificar estos valores y ver qué pasa
-            culebrita.Enqueue(posiciónActual);
+            culebrita.EnQueue(posiciónActual);
             var dirección = Direction.Derecha; //modificar estos valores y ver qué pasa
 
             DibujaPantalla(tamañoPantalla);
@@ -222,10 +222,10 @@ namespace culebrita
 
         static void Main()
         {
-            //culebritaNormal();
+            culebritaNormal();
 
-            Game snakeGame = new Game();
-            snakeGame.run();
+            //Game snakeGame = new Game();
+            //snakeGame.run();
 
 
             //ICola Cola = new SnakeArrayList();

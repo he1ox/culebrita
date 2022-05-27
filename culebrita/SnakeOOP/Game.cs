@@ -38,8 +38,8 @@ namespace culebrita.SnakeOOP
         public void run()
         {
             var foodPosition = Point.Empty; 
-            SnakeLineal snake = new SnakeLineal(1000000);
-            var snakeLength = 3;
+            SnakeLineal snake = new SnakeLineal(1000);
+            var snakeLength = 5;
             var currentPosition = new Point(0,9);
             var direccion = Direccion.DERECHA;
 
@@ -232,7 +232,7 @@ namespace culebrita.SnakeOOP
         Point ShowFood(SnakeLineal snake)
         {
             var foodPoint = Point.Empty;
-            var snakeHead = snake.UltimoElemento();
+            var snakeHead = snake.ListaCola.Last();
             var random = new Random();
 
 
