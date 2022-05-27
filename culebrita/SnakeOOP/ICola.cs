@@ -41,10 +41,22 @@ namespace culebrita.SnakeOOP
         /// <returns>True</returns>
         bool ColaLlena();
 
+        /// <summary>
+        /// Devuelve todos los elementos contenidos en la cola
+        /// </summary>
+        /// <returns>Devuelve todos los elementos de la cola</returns>
         Point[] GetElementos();
 
+        /// <summary>
+        /// Devuelve el elemento al final de la cola
+        /// </summary>
+        /// <returns>Devuelve el elemento al final de la cola</returns>
         Point UltimoElemento();
 
+        /// <summary>
+        /// Devuelve el tamaño de la cola
+        /// </summary>
+        /// <returns>Devuelve el tamaño de la cola</returns>
         int GetSize();
     }
 }

@@ -53,21 +53,13 @@ namespace culebrita.SnakeOOP
             if (ColaVacia()) throw new Exception("La cola está vacía");
             return (Point) ListaCola[Frente];
         }
-        public bool ColaVacia()
-        {
-            return ListaCola.Count == 0;
-        }
+        public bool ColaVacia() => ListaCola.Count == 0;
 
-        public bool ColaLlena()
-        {
-            //Ya que crece exponencialmente en base 2, el máximo número de elementos es int.MaxValue -> 2^31
-            return ListaCola.Count == int.MaxValue;
-        }
 
-        public int QueueSize()
-        {
-            return ListaCola.Capacity;
-        }
+        //Ya que crece exponencialmente en base 2, el máximo número de elementos es int.MaxValue -> 2^31
+        public bool ColaLlena() => ListaCola.Count == int.MaxValue;
+
+        public int QueueSize() => ListaCola.Capacity;
 
         public Point[] GetElementos()
         {
@@ -81,15 +73,9 @@ namespace culebrita.SnakeOOP
             return resultados;
         }
 
-        public Point UltimoElemento()
-        {
-            return (Point) ListaCola.ToArray().GetValue(Fin);
-        }
+        public Point UltimoElemento() => (Point)ListaCola.ToArray().GetValue(Fin);
 
+        public int GetSize() =>  ListaCola.Count;
 
-        public int GetSize()
-        {
-            return ListaCola.Count;
-        }
     }
 }
