@@ -226,7 +226,8 @@ namespace culebrita
             Game snakeGame = new Game();
             snakeGame.run();
 
-            //ICola Cola = new SnakeCircular();
+
+            //ICola Cola = new SnakeArrayList();
 
             //try
             //{
@@ -234,11 +235,15 @@ namespace culebrita
             //    Cola.EnQueue(2);
             //    Cola.EnQueue(3);
             //    Cola.EnQueue("Hola");
+            //    Cola.EnQueue(4);
+            //    Cola.EnQueue(5);
+
             //    Cola.DeQueue();
 
             //    while (!Cola.ColaVacia())
             //    {
             //        Console.WriteLine("Desencolando : " + Cola.DeQueue());
+
             //    }
             //}
             //catch (Exception)
