@@ -20,17 +20,12 @@ namespace culebrita.SnakeOOP
             ListaCola = new object[this.QueueSize];
         }
 
-        //Operaciones de modificar la cola
-
-        //EnQueue = Insertar
         public void EnQueue(object point)
         {
             if (ColaLlena()) throw new Exception("La cola está llena");
             ListaCola[++Fin] = point;
         }
 
-
-        //DeQueue - eliminar
         public object DeQueue()
         {
             if (ColaVacia()) throw new Exception("La cola está vacía");
@@ -40,20 +35,16 @@ namespace culebrita.SnakeOOP
             return aux;
         }
 
-        //Cola vacía
         public void BorrarCola()
         {
             Frente = 0;
             Fin = -1;
         }
-
         public object FrenteCola()
         {
             if (ColaVacia()) throw new Exception("La cola está vacía");
             return ListaCola[Frente];
         }
-
-        //Métodos de verificación de cola
         public bool ColaVacia()
         {
             return Frente > Fin;

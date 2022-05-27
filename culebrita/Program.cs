@@ -226,19 +226,19 @@ namespace culebrita
             Game snakeGame = new Game();
             snakeGame.run();
 
-            //Snake colaLineal = new Snake();
+            //ICola Cola = new SnakeCircular();
 
             //try
             //{
-            //    colaLineal.EnQueue(1);
-            //    colaLineal.EnQueue(2);
-            //    colaLineal.EnQueue(3);
-            //    colaLineal.EnQueue("Hola");
-            //    colaLineal.DeQueue();
+            //    Cola.EnQueue(1);
+            //    Cola.EnQueue(2);
+            //    Cola.EnQueue(3);
+            //    Cola.EnQueue("Hola");
+            //    Cola.DeQueue();
 
-            //    while (!colaLineal.ColaVacia())
+            //    while (!Cola.ColaVacia())
             //    {
-            //        Console.WriteLine("Desencolando : " + colaLineal.DeQueue());
+            //        Console.WriteLine("Desencolando : " + Cola.DeQueue());
             //    }
             //}
             //catch (Exception)
