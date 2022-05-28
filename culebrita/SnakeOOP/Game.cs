@@ -37,7 +37,7 @@ namespace culebrita.SnakeOOP
         /// <summary>
         /// Corre el programa
         /// </summary>
-        public void run()
+        public void Run()
         {
             var foodPosition = Point.Empty; 
             ICola snake = new SnakeLineal(1000);
@@ -50,7 +50,7 @@ namespace culebrita.SnakeOOP
             DibujaPantalla();
             MuestraPunteo();
 
-            while(moveSnake(snake, currentPosition, snakeLength))
+            while(MoveSnake(snake, currentPosition, snakeLength))
             {
                 Thread.Sleep(this.Velocidad);
                 direccion = GetDireccion(direccion);
@@ -196,7 +196,7 @@ namespace culebrita.SnakeOOP
         /// <param name="targetPosition"></param>
         /// <param name="snakeLength"></param>
         /// <returns>Devuelve true si el movimiento es posible, false si no</returns>
-        bool moveSnake(ICola snake, Point targetPosition, int snakeLength)
+        bool MoveSnake(ICola snake, Point targetPosition, int snakeLength)
         {
             var random = new Random();
 

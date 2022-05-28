@@ -225,7 +225,7 @@ namespace culebrita
             //culebritaNormal();
 
             Game snakeGame = new Game();
-            snakeGame.run();
+            snakeGame.Run();
 
 
             //ICola Cola = new SnakeArrayList();
