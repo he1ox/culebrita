@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace culebrita.SnakeOOP
 {
@@ -41,6 +43,10 @@ namespace culebrita.SnakeOOP
         /// </summary>
         public void Run()
         {
+            SoundPlayer player = new SoundPlayer();
+            player.SoundLocation = "C:\\Sonidos\\FirstBlood.wav";
+            player.Load();
+
             var foodPosition = Point.Empty; 
             var snakeLength = 5;
             var currentPosition = new Point(0,9);
@@ -63,6 +69,11 @@ namespace culebrita.SnakeOOP
                     snakeLength++;
                     this.Punteo += 10;
                     MuestraPunteo();
+                    //NO asincrono
+                    //Console.Beep(1000,100);
+                    //Asincrono
+                    //Task.Run(() => Console.Beep(1000,100));
+                    player.Play();
                 }
 
                 if (foodPosition == Point.Empty)
@@ -72,8 +83,10 @@ namespace culebrita.SnakeOOP
 
             }
 
+            player.Play();
             Console.ResetColor();
             Console.SetCursorPosition(this.ScreenWidth / 2 - 4, this.ScreenHeight / 2);
+            //Console.Beep(200,200);
             Console.Write("Haz fallado.");
             Thread.Sleep(2000);
             Console.ReadKey();

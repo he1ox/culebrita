@@ -219,7 +219,6 @@ namespace culebrita
         }
 
 
-
         static void Main()
         {
             //culebritaNormal();
@@ -227,9 +226,19 @@ namespace culebrita
             Game snakeGame = new Game();
 
             Console.WriteLine("Bienvenido al juego de la culebrita");
+            Console.WriteLine("1. Arreglo Lineal");
+            Console.WriteLine("2. ArrayList ");
 
-            snakeGame.TipoDeCola = colasFabrica.GetCola("ARREGLO LINEAL");
+            int opcion = Convert.ToInt32(Console.ReadLine());
 
+            switch (opcion)
+            {
+                case 1:
+                    snakeGame.TipoDeCola = colasFabrica.GetCola("ARREGLO LINEAL");
+                    break;
+            }
+
+            //snakeGame.TipoDeCola = colasFabrica.GetCola("ARREGLO LINEAL");
             //snakeGame.TipoDeCola = new SnakeLineal(10000);
 
             snakeGame.Run();
