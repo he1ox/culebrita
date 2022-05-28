@@ -74,12 +74,11 @@ namespace culebrita.SnakeOOP
 
             if (!ColaVacia())
             {
-                n = 1;
+                //n = 1;
                 while( comienzo != UltimoNodo)
                 {
-                    n++;
                     comienzo = comienzo.Siguiente;
-                    elementos[n] = Point.Empty;
+                    elementos[n++] = Point.Empty;
                 }
             }
 

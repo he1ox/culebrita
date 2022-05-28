@@ -16,6 +16,7 @@ namespace culebrita.SnakeOOP
         private int Punteo { get; set; }
         private int Velocidad { get; set; }
 
+        public ICola TipoDeCola { get; set; }
 
         enum Direccion
         {
@@ -32,6 +33,7 @@ namespace culebrita.SnakeOOP
             this.ScreenWidth = 60;
             this.Punteo = 0;
             this.Velocidad = 0; // 100 milisegundos = 0.1s
+            TipoDeCola = new SnakeArrayList();
         }
 
         /// <summary>
@@ -40,17 +42,16 @@ namespace culebrita.SnakeOOP
         public void Run()
         {
             var foodPosition = Point.Empty; 
-            ICola snake = new SnakeEnlazada();
             var snakeLength = 5;
             var currentPosition = new Point(0,9);
             var direccion = Direccion.DERECHA;
             this.Velocidad = 100;
 
-            snake.EnQueue(currentPosition);
+            TipoDeCola.EnQueue(currentPosition);
             DibujaPantalla();
             MuestraPunteo();
 
-            while(MoveSnake(snake, currentPosition, snakeLength))
+            while(MoveSnake(TipoDeCola, currentPosition, snakeLength))
             {
                 Thread.Sleep(this.Velocidad);
                 direccion = GetDireccion(direccion);
@@ -66,7 +67,7 @@ namespace culebrita.SnakeOOP
 
                 if (foodPosition == Point.Empty)
                 {
-                    foodPosition = ShowFood(snake);
+                    foodPosition = ShowFood(TipoDeCola);
                 }
 
             }

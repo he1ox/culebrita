@@ -225,6 +225,9 @@ namespace culebrita
             //culebritaNormal();
 
             Game snakeGame = new Game();
+
+            //snakeGame.TipoDeCola = new SnakeLineal(10000);
+
             snakeGame.Run();
 
 
