@@ -20,7 +20,7 @@ namespace culebrita.SnakeOOP
         public string NombreJugador { get; set; }
         public ICola TipoDeCola { get; set; }
         private int TopeVelocidad { get; set; }
-
+        private SoundPlayer player { get; set; }
         enum Direccion
         {
             ARRIBA,
@@ -45,9 +45,9 @@ namespace culebrita.SnakeOOP
         /// </summary>
         public void Run()
         {
-            SoundPlayer player = new SoundPlayer();
-            player.SoundLocation = "C:\\Sonidos\\FirstBlood.wav";
-            player.Load();
+            //SoundPlayer player = new SoundPlayer();
+            //player.SoundLocation = "C:\\Sonidos\\FirstBlood.wav";
+            //player.Load();
 
             var foodPosition = Point.Empty; 
             var snakeLength = 5;
@@ -81,7 +81,7 @@ namespace culebrita.SnakeOOP
                     //Console.Beep(1000,100);
                     //Asincrono
                     //Task.Run(() => Console.Beep(1000,100));
-                    player.Play();
+                    ReproduceSonidos(Punteo);
                 }
 
                 if (foodPosition == Point.Empty)
@@ -91,11 +91,10 @@ namespace culebrita.SnakeOOP
 
             }
 
-            player.Play();
+            ReproduceSonidos();
             Console.ResetColor();
             Console.SetCursorPosition(this.ScreenWidth / 2 - 4, this.ScreenHeight / 2);
-            //Console.Beep(200,200);
-            Console.Write("Haz fallado.");
+            Console.Write($"Haz fallado. \n\t\tTu máximo punteo fue: {this.Punteo.ToString("00000000")}");
             Thread.Sleep(2000);
             Console.ReadKey();
         }
@@ -295,6 +294,45 @@ namespace culebrita.SnakeOOP
             Console.Write(" ");
 
             return foodPoint;
+        }
+
+        void ReproduceSonidos(int punteo)
+        {
+            player = new SoundPlayer();
+
+            if (punteo == 10)
+            {
+                player.SoundLocation = "C:\\Sonidos\\FirstBlood.wav";
+                player.Load();
+                player.Play();
+            }else if(punteo == 30)
+            {
+                player.SoundLocation = "C:\\Sonidos\\KillingSpree.wav";
+                player.Load();
+                player.Play();
+            }else if(punteo == 60)
+            {
+                player.SoundLocation = "C:\\Sonidos\\MegaKill.wav";
+                player.Load();
+                player.Play();
+            } else if(punteo == 90)
+            {
+                player.SoundLocation = "C:\\Sonidos\\MonsterKill.wav";
+                player.Load();
+                player.Play();
+            }
+            else
+            {
+                Task.Run(() => Console.Beep(1000, 200));
+            }
+        }
+
+        void ReproduceSonidos()
+        {
+            player = new SoundPlayer();
+            player.SoundLocation = "C:\\Sonidos\\NO.wav";
+            player.Load();
+            player.Play();
         }
 
     }
