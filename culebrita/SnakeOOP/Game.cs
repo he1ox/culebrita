@@ -40,7 +40,7 @@ namespace culebrita.SnakeOOP
         public void Run()
         {
             var foodPosition = Point.Empty; 
-            ICola snake = new SnakeLineal(1000);
+            ICola snake = new SnakeEnlazada();
             var snakeLength = 5;
             var currentPosition = new Point(0,9);
             var direccion = Direccion.DERECHA;

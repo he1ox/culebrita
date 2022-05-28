@@ -26,15 +26,22 @@ namespace culebrita.SnakeOOP
             }
             else
             {
-                UltimoNodo = nodoEntrante;
+                UltimoNodo.Siguiente = nodoEntrante;
             }
-            
+
+            UltimoNodo = nodoEntrante;
+            Size++;
 
         }
 
         public Point DeQueue()
         {
-            throw new NotImplementedException();
+            if (ColaVacia()) throw new Exception("La cola está vacía");
+
+            Point valorTemporal = PrimerNodo.Dato;
+            PrimerNodo = PrimerNodo.Siguiente;
+            Size--;
+            return valorTemporal;
         }
 
         public void BorrarCola()
@@ -61,7 +68,22 @@ namespace culebrita.SnakeOOP
 
         public Point[] GetElementos()
         {
-            throw new NotImplementedException();
+            Point[] elementos = new Point[1000];
+            int n = 0;
+            Nodo comienzo = PrimerNodo;
+
+            if (!ColaVacia())
+            {
+                n = 1;
+                while( comienzo != UltimoNodo)
+                {
+                    n++;
+                    comienzo = comienzo.Siguiente;
+                    elementos[n] = Point.Empty;
+                }
+            }
+
+            return elementos;
         }
 
         public Point UltimoElemento()
