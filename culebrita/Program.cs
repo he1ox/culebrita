@@ -223,8 +223,12 @@ namespace culebrita
         static void Main()
         {
             //culebritaNormal();
-
+            ColasFabrica colasFabrica = new ColasFabrica();
             Game snakeGame = new Game();
+
+            Console.WriteLine("Bienvenido al juego de la culebrita");
+
+            snakeGame.TipoDeCola = colasFabrica.GetCola("ARREGLO LINEAL");
 
             //snakeGame.TipoDeCola = new SnakeLineal(10000);
 
