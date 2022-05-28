@@ -181,8 +181,8 @@ namespace culebrita
             var velocidad = 100; //modificar estos valores y ver qué pasa
             var posiciónComida = Point.Empty;
             var tamañoPantalla = new Size(60, 20);
-            ICola culebrita = new SnakeArrayList();
-            var longitudCulebra = 10; //modificar estos valores y ver qué pasa
+            ICola culebrita = new SnakeLineal(1000);
+            var longitudCulebra = 3; //modificar estos valores y ver qué pasa
             var posiciónActual = new Point(0, 9); //modificar estos valores y ver qué pasa
             culebrita.EnQueue(posiciónActual);
             var dirección = Direction.Derecha; //modificar estos valores y ver qué pasa
@@ -222,10 +222,10 @@ namespace culebrita
 
         static void Main()
         {
-            culebritaNormal();
+            //culebritaNormal();
 
-            //Game snakeGame = new Game();
-            //snakeGame.run();
+            Game snakeGame = new Game();
+            snakeGame.run();
 
 
             //ICola Cola = new SnakeArrayList();

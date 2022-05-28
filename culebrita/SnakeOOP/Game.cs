@@ -38,7 +38,7 @@ namespace culebrita.SnakeOOP
         public void run()
         {
             var foodPosition = Point.Empty; 
-            SnakeLineal snake = new SnakeLineal(1000);
+            ICola snake = new SnakeLineal(1000);
             var snakeLength = 5;
             var currentPosition = new Point(0,9);
             var direccion = Direccion.DERECHA;
@@ -186,12 +186,13 @@ namespace culebrita.SnakeOOP
             return siguientePosicion;
         }
 
-        bool moveSnake(SnakeLineal snake, Point targetPosition, int snakeLength)
+        bool moveSnake(ICola snake, Point targetPosition, int snakeLength)
         {
             var lastPoint = snake.UltimoElemento();
+
             if (lastPoint.Equals(targetPosition)) return true;
 
-            if (snake.ListaCola.Any(x => x.Equals(targetPosition))) return true;
+            if (snake.GetElementos().Any(x => x.Equals(targetPosition))) return false;
 
             if (targetPosition.X < 0 || targetPosition.X >= this.ScreenWidth || targetPosition.Y < 0
                 || targetPosition.Y >= this.ScreenHeight)
@@ -211,7 +212,7 @@ namespace culebrita.SnakeOOP
             Console.Write(" ");
 
             //Quitamos la cola
-            if (snake.Size > snakeLength)
+            if (snake.GetSize() > snakeLength)
             {
                 var removePoint = (Point) snake.DeQueue();
                 Console.BackgroundColor = ConsoleColor.Black;
@@ -229,19 +230,18 @@ namespace culebrita.SnakeOOP
         /// cabeza de la serpiente
         /// </summary>
         /// <returns>Devuelve la nueva posición para la comida</returns>
-        Point ShowFood(SnakeLineal snake)
+        Point ShowFood(ICola snake)
         {
             var foodPoint = Point.Empty;
-            var snakeHead = snake.ListaCola.Last();
+            var snakeHead = snake.UltimoElemento(); ;
             var random = new Random();
-
 
             do
             {
                 //Quitamos un -1 por la linea blanca que rodea la consola
                 var x = random.Next(0, this.ScreenWidth - 1);
                 var y = random.Next(0, this.ScreenHeight - 1);
-                if (snake.ListaCola.All(p => p.X != x || p.Y != y) && Math.Abs(x - snakeHead.X) + Math.Abs(y - snakeHead.Y) > 8)
+                if (snake.GetElementos().All(p => p.X != x || p.Y != y) && Math.Abs(x - snakeHead.X) + Math.Abs(y - snakeHead.Y) > 8)
                 {
                     foodPoint = new Point(x, y);
                 }

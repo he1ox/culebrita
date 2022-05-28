@@ -13,7 +13,10 @@ namespace culebrita.SnakeOOP
         protected int Size { get; set; }
         protected Point[] ListaCola { get; set; }
 
-        private int Siguiente(int r) => (r + 1) % QueueSize;
+        private int Siguiente(int r)
+        {
+            return (r + 1) % QueueSize;
+        }
 
         public SnakeCircular(int QueueSize = 40)
         {
@@ -50,9 +53,16 @@ namespace culebrita.SnakeOOP
             Frente = 0;
         }
 
-        public bool ColaVacia() => Frente == Siguiente(Fin);
 
-        public bool ColaLlena() => Fin == Siguiente(Siguiente(Fin));
+        public bool ColaVacia()
+        {
+            return Frente == Siguiente(Fin);
+        }
+
+        public bool ColaLlena()
+        {
+            return Fin == Siguiente(Siguiente(Fin));
+        }
 
         public Point UltimoElemento()
         {
@@ -60,8 +70,15 @@ namespace culebrita.SnakeOOP
             return ListaCola[Fin];
         }
 
-        public Point[] GetElementos() => ListaCola;
+        public Point[] GetElementos()
+        {
+            return ListaCola;
+        }
 
-        public int GetSize() => Size;
+        public int GetSize()
+        {
+            return Size;
+        }
     }
+
 }
