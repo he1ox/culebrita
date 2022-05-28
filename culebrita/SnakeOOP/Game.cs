@@ -188,6 +188,8 @@ namespace culebrita.SnakeOOP
 
         bool moveSnake(ICola snake, Point targetPosition, int snakeLength)
         {
+            var random = new Random();
+
             var lastPoint = snake.UltimoElemento();
 
             if (lastPoint.Equals(targetPosition)) return true;
@@ -200,8 +202,9 @@ namespace culebrita.SnakeOOP
                 return false;
             };
 
+            //Snake RGB
+            Console.BackgroundColor = (System.ConsoleColor) random.Next(1,16);
 
-            Console.BackgroundColor = ConsoleColor.Green;
             Console.SetCursorPosition(lastPoint.X + 1, lastPoint.Y + 1);
             Console.Write(" ");
 
@@ -248,7 +251,10 @@ namespace culebrita.SnakeOOP
 
             } while (foodPoint == Point.Empty);
 
-            Console.BackgroundColor= ConsoleColor.Blue;
+
+            //Genera un color aleatorio y lo castea el enum ConsoleColor, omite el 0 porque es negro
+            Console.BackgroundColor = (System.ConsoleColor) random.Next(1,16);
+
             Console.SetCursorPosition(foodPoint.X + 1, foodPoint.Y + 1);
             Console.Write(" ");
 
