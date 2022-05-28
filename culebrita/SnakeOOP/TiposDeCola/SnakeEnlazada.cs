@@ -56,10 +56,8 @@ namespace culebrita.SnakeOOP
             return PrimerNodo.Dato;
         }
 
-        public bool ColaVacia()
-        {
-            return PrimerNodo == null;
-        }
+        public bool ColaVacia() => PrimerNodo == null;
+
 
         public bool ColaLlena()
         {
@@ -91,9 +89,7 @@ namespace culebrita.SnakeOOP
             return UltimoNodo.Dato;
         }
 
-        public int GetSize()
-        {
-            return Size;
-        }
+        public int GetSize() => Size;
+
     }
 }

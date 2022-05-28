@@ -51,31 +51,22 @@ namespace culebrita.SnakeOOP
             if (ColaVacia()) throw new Exception("La cola está vacía");
             return ListaCola[Frente];
         }
-        public bool ColaVacia()
-        {
-            return Frente > Fin;
-        }
+        public bool ColaVacia() => Frente > Fin;
 
-        public bool ColaLlena()
-        {
-            return Fin == this.QueueSize - 1;
-        }
+
+        public bool ColaLlena() => Fin == this.QueueSize - 1;
+
 
         public Point UltimoElemento()
         {
             if (ColaVacia()) throw new Exception("La cola está vacía");
-
             return ListaCola[Fin];
         }
 
-        public Point[] GetElementos()
-        {
-            return ListaCola;
-        }
+        public Point[] GetElementos() => ListaCola;
 
-        public int GetSize()
-        {
-            return Size;
-        }
+
+        public int GetSize() => Size;
+
     }
 }
