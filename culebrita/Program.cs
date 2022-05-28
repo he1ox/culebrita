@@ -225,23 +225,26 @@ namespace culebrita
             ColasFabrica colasFabrica = new ColasFabrica();
             Game snakeGame = new Game();
 
-            Console.WriteLine("Bienvenido al juego de la culebrita");
+            Console.Write("¡Bienvenido al juego de la Culebrita!\n\nIngresa tu nombre por favor -> ");
+
+            snakeGame.NombreJugador = Console.ReadLine();
+
+            Console.Write("\nElige el tipo de cola:\n______________________\n");
             Console.WriteLine("1. Arreglo Lineal");
-            Console.WriteLine("2. ArrayList ");
+            Console.WriteLine("2. Lista Enlazada");
+            Console.WriteLine("3. Arreglo Circular");
+            Console.WriteLine("4. Array List\n______________________\n");
 
-            int opcion = Convert.ToInt32(Console.ReadLine());
+            Console.Write("Ingresa un tipo por favor -> ");
 
-            switch (opcion)
-            {
-                case 1:
-                    snakeGame.TipoDeCola = colasFabrica.GetCola("ARREGLO LINEAL");
-                    break;
-            }
+            string input = Console.ReadLine();
+            snakeGame.TipoDeCola = colasFabrica.GetCola(input);
+            snakeGame.Run();
+
 
             //snakeGame.TipoDeCola = colasFabrica.GetCola("ARREGLO LINEAL");
             //snakeGame.TipoDeCola = new SnakeLineal(10000);
 
-            snakeGame.Run();
 
 
             //ICola Cola = new SnakeArrayList();

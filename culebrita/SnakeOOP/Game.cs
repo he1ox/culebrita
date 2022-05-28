@@ -17,8 +17,9 @@ namespace culebrita.SnakeOOP
         private int ScreenWidth { get; set; }
         private int Punteo { get; set; }
         private int Velocidad { get; set; }
-
+        public string NombreJugador { get; set; }
         public ICola TipoDeCola { get; set; }
+        private int TopeVelocidad { get; set; }
 
         enum Direccion
         {
@@ -35,6 +36,7 @@ namespace culebrita.SnakeOOP
             this.ScreenWidth = 60;
             this.Punteo = 0;
             this.Velocidad = 0; // 100 milisegundos = 0.1s
+            this.TopeVelocidad = 50; // 50 Ms
             TipoDeCola = new SnakeArrayList();
         }
 
@@ -68,7 +70,13 @@ namespace culebrita.SnakeOOP
                     foodPosition = Point.Empty;
                     snakeLength++;
                     this.Punteo += 10;
+
+                    if (Velocidad > TopeVelocidad)
+                    {
+                        this.Velocidad -= 5;
+                    }
                     MuestraPunteo();
+
                     //NO asincrono
                     //Console.Beep(1000,100);
                     //Asincrono
@@ -132,11 +140,15 @@ namespace culebrita.SnakeOOP
         void MuestraPunteo()
         {
             Console.BackgroundColor = ConsoleColor.White;
-            Console.ForegroundColor = ConsoleColor.Green;
+            Console.ForegroundColor = ConsoleColor.Black;
 
             Console.SetCursorPosition(1, 0);
 
             Console.Write($"Punteo: {this.Punteo.ToString("00000000")}");
+
+
+            Console.SetCursorPosition(20, 0);
+            Console.Write("Jugador: " + NombreJugador);
         }
 
         /// <summary>
