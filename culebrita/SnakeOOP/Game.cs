@@ -31,10 +31,12 @@ namespace culebrita.SnakeOOP
             this.ScreenHeight = 20;
             this.ScreenWidth = 60;
             this.Punteo = 0;
-            this.Velocidad = 100; // 100 milisegundos = 0.1s
+            this.Velocidad = 0; // 100 milisegundos = 0.1s
         }
 
-
+        /// <summary>
+        /// Corre el programa
+        /// </summary>
         public void run()
         {
             var foodPosition = Point.Empty; 
@@ -42,6 +44,7 @@ namespace culebrita.SnakeOOP
             var snakeLength = 5;
             var currentPosition = new Point(0,9);
             var direccion = Direccion.DERECHA;
+            this.Velocidad = 100;
 
             snake.EnQueue(currentPosition);
             DibujaPantalla();
@@ -186,6 +189,13 @@ namespace culebrita.SnakeOOP
             return siguientePosicion;
         }
 
+        /// <summary>
+        /// Se encarga de movilizar el snake a la posición requerida
+        /// </summary>
+        /// <param name="snake"></param>
+        /// <param name="targetPosition"></param>
+        /// <param name="snakeLength"></param>
+        /// <returns>Devuelve true si el movimiento es posible, false si no</returns>
         bool moveSnake(ICola snake, Point targetPosition, int snakeLength)
         {
             var random = new Random();
@@ -203,7 +213,7 @@ namespace culebrita.SnakeOOP
             };
 
             //Snake RGB
-            Console.BackgroundColor = (System.ConsoleColor) random.Next(1,16);
+            Console.BackgroundColor = (System.ConsoleColor) random.Next(1,11);
 
             Console.SetCursorPosition(lastPoint.X + 1, lastPoint.Y + 1);
             Console.Write(" ");
